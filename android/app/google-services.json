@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "755472577604",
+    "project_id": "tsf-projects-e0bd9",
+    "storage_bucket": "tsf-projects-e0bd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755472577604:android:f302ef74bad1d22e62b811",
+        "android_client_info": {
+          "package_name": "com.mudrab.login_with_socials"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755472577604-5ffpg3h1eo715jdvlfu0v6pngo2aame8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNJ0izEI4Peu4X_zau_2bBTd-MWuxgFYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755472577604-5ffpg3h1eo715jdvlfu0v6pngo2aame8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
