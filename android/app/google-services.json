@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "755472577604-hv7cvaue2o61nh6754koa55np83cmtj4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mudrab.login_with_socials",
+            "certificate_hash": "4feea8602ba723b6059df84e417c3d87c0525ea3"
+          }
+        },
+        {
           "client_id": "755472577604-5ffpg3h1eo715jdvlfu0v6pngo2aame8.apps.googleusercontent.com",
           "client_type": 3
         }

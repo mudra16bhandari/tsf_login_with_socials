@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_with_socials/blocs/auth_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:login_with_socials/blocs/auth_bloc_fb.dart';
+import 'package:login_with_socials/blocs/auth_bloc_google.dart';
+import 'package:login_with_socials/profile.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -9,11 +12,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  
 
   @override
   Widget build(BuildContext context) {
 
-    var authBloc = Provider.of<AuthBloc>(context);
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -60,7 +63,19 @@ class _LoginState extends State<Login> {
                 ),
                 color: Colors.transparent,
                 textTheme: ButtonTextTheme.accent,
-                onPressed: () {},
+                onPressed: () async{
+                  AuthBlocGoogle gu = AuthBlocGoogle();
+                  gu.googleSignin.disconnect();
+                   User googleUser = await gu.loginGoogle();
+                   if(googleUser!=null){
+                     Navigator.of(context).pushReplacement(
+                     MaterialPageRoute(builder: (context)=>Profile(googleUser.photoURL,googleUser.displayName, googleUser.email)));
+                   }
+                   else{
+                     print("Error occured");
+                   }
+            
+                },
               ),
             ),
             Padding(
@@ -78,7 +93,17 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
               color: Color.fromRGBO(66, 103, 178, 1),
-              onPressed: () => authBloc.loginFacebook(),
+              onPressed: () async{
+                User fbUser = await AuthBlocFacebook().loginFacebook();
+                if(fbUser!=null){
+                   Navigator.of(context).pushReplacement(
+                     MaterialPageRoute(builder: (context)=>Profile(fbUser.photoURL,fbUser.displayName, fbUser.email)));
+                }
+                else{
+                  print("An Error Occured.");
+                }
+
+              }
               ),
             Padding(
               padding: EdgeInsets.only(top: 10),
@@ -152,5 +177,7 @@ class _LoginState extends State<Login> {
       ),
       //),
     );
+
+
   }
 }

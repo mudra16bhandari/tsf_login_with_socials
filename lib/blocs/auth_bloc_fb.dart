@@ -2,14 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:login_with_socials/services/auth_service.dart';
 
-class AuthBloc{
+class AuthBlocFacebook{
 
   final authService = AuthService();
   final fb = FacebookLogin();
 
   Stream<User> get currentUser => authService.currentUser;
 
-  loginFacebook() async{
+  Future<User> loginFacebook() async{
     print("Logging in with Facebook");
   
     final FacebookLoginResult res = await fb.logIn(
@@ -34,15 +34,18 @@ class AuthBloc{
 
       final result = await authService.signInWithCredential(credential);
       print('${result.user.displayName} is now logged in.');
+      return result.user;
 
       break;
       case FacebookLoginStatus.cancel:
       print("The user cancelled the login");
+      return null;
       break;
       case FacebookLoginStatus.error:
       print("There was an error");
+      return null;
       break;
-
+      default: return null;
 
     }
 
