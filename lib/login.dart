@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_with_socials/blocs/auth_bloc.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -10,6 +12,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
+    var authBloc = Provider.of<AuthBloc>(context);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -73,25 +78,8 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
               color: Color.fromRGBO(66, 103, 178, 1),
-              onPressed: (){}
-                /*async {
-                      await FBAuthProviderService.instance.fb_signIn();
-                      if (FBAuthProviderService.instance.fbname != null) {
-                        Toast.show("Signed in using Facebook!", context,
-                            duration: Toast.LENGTH_LONG,
-                            backgroundColor: Colors.grey,
-                            gravity: Toast.BOTTOM);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Profile(
-                                  FBAuthProviderService.instance.fbpicture,
-                                  FBAuthProviderService.instance.fbname,
-                                  FBAuthProviderService.instance.fbemail)),
-                        );
-                      }
-                    },*/
-            ),
+              onPressed: () => authBloc.loginFacebook(),
+              ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
