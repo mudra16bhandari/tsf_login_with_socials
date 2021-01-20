@@ -5,20 +5,14 @@ import 'package:login_with_socials/profile.dart';
 import 'package:login_with_socials/socials/facebook.dart';
 import 'package:login_with_socials/socials/google.dart';
 
-
-
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  
-
   @override
   Widget build(BuildContext context) {
-
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -64,18 +58,17 @@ class _LoginState extends State<Login> {
                 ),
                 color: Colors.transparent,
                 textTheme: ButtonTextTheme.accent,
-                onPressed: () async{
+                onPressed: () async {
                   AuthBlocGoogle gu = AuthBlocGoogle();
                   gu.googleSignin.disconnect();
-                   User googleUser = await gu.loginGoogle();
-                   if(googleUser!=null){
-                     Navigator.of(context).pushReplacement(
-                     MaterialPageRoute(builder: (context)=>Profile(googleUser.photoURL,googleUser.displayName, googleUser.email)));
-                   }
-                   else{
-                     print("Error occured");
-                   }
-            
+                  User googleUser = await gu.loginGoogle();
+                  if (googleUser != null) {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => Profile(googleUser.photoURL,
+                            googleUser.displayName, googleUser.email)));
+                  } else {
+                    print("Error occured");
+                  }
                 },
               ),
             ),
@@ -83,38 +76,34 @@ class _LoginState extends State<Login> {
               padding: EdgeInsets.only(top: 10),
             ),
             RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              elevation: 7.5,
-              splashColor: Colors.black,
-              padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
-              child: Text("Facebook ",
-                  style: GoogleFonts.roboto(
-                      textStyle: TextStyle(color: Colors.white),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15)),
-              color: Color.fromRGBO(66, 103, 178, 1),
-              onPressed: () async{
-                    AuthBlocFacebook fb = AuthBlocFacebook();
-                      fb.logout();
-                      User fbUser = await fb.loginFacebook();
-                      if(fbUser!=null){
-                        print(fbUser.email);
-                        Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context)=>Profile(fbUser.photoURL,fbUser.displayName, fbUser.email)));
-                      }
-                      else{
-                        print("Error occured");
-                      }
-              }
-              ),
-            
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                elevation: 7.5,
+                splashColor: Colors.black,
+                padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
+                child: Text("Facebook ",
+                    style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15)),
+                color: Color.fromRGBO(66, 103, 178, 1),
+                onPressed: () async {
+                  AuthBlocFacebook fb = AuthBlocFacebook();
+                  fb.logout();
+                  User fbUser = await fb.loginFacebook();
+                  if (fbUser != null) {
+                    print(fbUser.email);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => Profile(fbUser.photoURL,
+                            fbUser.displayName, fbUser.email)));
+                  } else {
+                    print("Error occured");
+                  }
+                }),
           ],
         ),
       ),
       //),
     );
-
-
   }
 }
