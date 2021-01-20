@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_with_socials/blocs/auth_bloc_google.dart';
 import 'package:login_with_socials/login.dart';
+import 'package:login_with_socials/socials/google.dart';
 
 
 // ignore: must_be_immutable

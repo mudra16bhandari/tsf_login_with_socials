@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_with_socials/blocs/auth_bloc_fb.dart';
-import 'package:login_with_socials/blocs/auth_bloc_google.dart';
 import 'package:login_with_socials/profile.dart';
+import 'package:login_with_socials/socials/facebook.dart';
+import 'package:login_with_socials/socials/google.dart';
+
 
 
 class Login extends StatefulWidget {
@@ -94,50 +95,19 @@ class _LoginState extends State<Login> {
                       fontSize: 15)),
               color: Color.fromRGBO(66, 103, 178, 1),
               onPressed: () async{
-                User fbUser = await AuthBlocFacebook().loginFacebook();
-                if(fbUser!=null){
-                   Navigator.of(context).pushReplacement(
-                     MaterialPageRoute(builder: (context)=>Profile(fbUser.photoURL,fbUser.displayName, fbUser.email)));
-                }
-                else{
-                  print("An Error Occured.");
-                }
-
+                    AuthBlocFacebook fb = AuthBlocFacebook();
+                      fb.logout();
+                      User fbUser = await fb.loginFacebook();
+                      if(fbUser!=null){
+                        print(fbUser.email);
+                        Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context)=>Profile(fbUser.photoURL,fbUser.displayName, fbUser.email)));
+                      }
+                      else{
+                        print("Error occured");
+                      }
               }
               ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromRGBO(252, 204, 99, 1),
-                    Color.fromRGBO(251, 173, 80, 1),
-                    Color.fromRGBO(233, 89, 80, 1),
-                    Color.fromRGBO(205, 72, 107, 1),
-                    Color.fromRGBO(188, 42, 141, 1),
-                    Color.fromRGBO(138, 58, 185, 1),
-                    Color.fromRGBO(76, 104, 215, 1)
-                  ],
-                ),
-              ),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                elevation: 7.5,
-                splashColor: Colors.black,
-                padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
-                child: Text("Instagram",
-                    style: GoogleFonts.roboto(
-                        textStyle: TextStyle(color: Colors.white),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15)),
-                color: Colors.transparent,
-                onPressed: () {},
-              ),
-            ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
@@ -147,30 +117,14 @@ class _LoginState extends State<Login> {
               elevation: 7.5,
               splashColor: Colors.black,
               padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
-              child: Text("  LinkedIn  ",
+              child: Text("  Twitter  ",
                   style: GoogleFonts.roboto(
                       textStyle: TextStyle(color: Colors.white),
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
               color: Color.fromRGBO(14, 118, 168, 1),
-              onPressed: () {},
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              elevation: 7.5,
-              splashColor: Colors.grey,
-              padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
-              child: Text("    GitHub    ",
-                  style: GoogleFonts.roboto(
-                      textStyle: TextStyle(color: Colors.white),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15)),
-              color: Color.fromRGBO(36, 41, 46, 1),
-              onPressed: () {},
+              onPressed: (){
+              },
             ),
           ],
         ),

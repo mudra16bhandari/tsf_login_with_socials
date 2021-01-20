@@ -14,8 +14,8 @@ class AuthBlocFacebook{
   
     final FacebookLoginResult res = await fb.logIn(
       permissions: [
-        FacebookPermission.publicProfile,
-        FacebookPermission.email
+        FacebookPermission.email,
+        FacebookPermission.publicProfile
       ]
     );
 
@@ -24,28 +24,29 @@ class AuthBlocFacebook{
     switch(res.status){
 
       case FacebookLoginStatus.success:
-      print("Login Successful");
+        print("Login Successful");
 
-      //Get Token
-      final FacebookAccessToken fbToken = res.accessToken;
+        //Get Token
+        final FacebookAccessToken fbToken = res.accessToken;
 
-      //Convert to Auth Credential
-      final AuthCredential credential = FacebookAuthProvider.credential(fbToken.token);
+        //Convert to Auth Credential
+        final AuthCredential credential = FacebookAuthProvider.credential(fbToken.token);
+        print(fbToken.token);
 
-      final result = await authService.signInWithCredential(credential);
-      print('${result.user.displayName} is now logged in.');
-      return result.user;
-
-      break;
+        final result = await authService.signInWithCredential(credential);
+        print('${result.user.displayName} is now logged in.');
+        return result.user;
+        break;
       case FacebookLoginStatus.cancel:
-      print("The user cancelled the login");
-      return null;
-      break;
+        print("The user cancelled the login");
+        return null;
+        break;
       case FacebookLoginStatus.error:
       print("There was an error");
-      return null;
-      break;
-      default: return null;
+        return null;
+        break;
+      default:
+        return null;
 
     }
 
