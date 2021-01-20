@@ -108,24 +108,7 @@ class _LoginState extends State<Login> {
                       }
               }
               ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              elevation: 7.5,
-              splashColor: Colors.black,
-              padding: EdgeInsets.fromLTRB(55, 15, 55, 15),
-              child: Text("  Twitter  ",
-                  style: GoogleFonts.roboto(
-                      textStyle: TextStyle(color: Colors.white),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15)),
-              color: Color.fromRGBO(14, 118, 168, 1),
-              onPressed: (){
-              },
-            ),
+            
           ],
         ),
       ),
